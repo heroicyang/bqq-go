@@ -1,4 +1,4 @@
-// A Tecent Business QQ client in go.
+// A Tencent Business QQ client in go.
 // https://github.com/heroicyang/bqq-go
 //
 // @author Herioc Yang <me@heroicyang.com>

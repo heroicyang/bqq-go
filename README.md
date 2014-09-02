@@ -1,5 +1,5 @@
 ## bqq-go
-> A Tecent Business QQ API Wrapper In Go.
+> A Tencent Business QQ API Wrapper In Go.
 
 ## Usage
 
