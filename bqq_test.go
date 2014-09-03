@@ -98,57 +98,262 @@ func checkAccess(r *http.Request) (canAccess bool) {
 }
 
 func companyInfoHandler(w http.ResponseWriter, r *http.Request) {
-	var res *Result
+	var res string
 
 	if !checkAccess(r) {
-		res = &Result{
-			Ret: 1,
-			Msg: "auth required",
-		}
+		res = `{ "ret": 1, "msg": "auth required" }`
 	} else {
-		res = &Result{
-			Ret: 0,
-			Data: map[string]interface{}{
+		res = `{
+			"ret": 0,
+			"data": {
 				"company_name":     "Company Name",
-				"company_fullname": "Company FullName",
-			},
-		}
+				"company_fullname": "Company FullName"
+			}
+		}`
 	}
 
-	result, _ := json.Marshal(res)
-
 	w.Header().Set("Content-Type", "application/json")
-	w.Write(result)
+	w.Write([]byte(res))
 }
 
 func departmentsListHandler(w http.ResponseWriter, r *http.Request) {
-	var res *Result
+	var res string
 
 	if !checkAccess(r) {
-		res = &Result{
-			Ret: 1,
-			Msg: "auth required",
-		}
+		res = `{ "ret": 1, "msg": "auth required" }`
 	} else {
-		res = &Result{
-			Ret: 0,
-			Data: map[string]interface{}{
+		res = `{
+			"ret": 0,
+			"data": {
 				"timestamp": 1408414724,
-				"items": [1]map[string]interface{}{
-					map[string]interface{}{
-						"dept_id":   74537005,
-						"p_dept_id": 1136750599,
-						"dept_name": "test",
-					},
-				},
-			},
+				"items": [{
+					"dept_id":   74537005,
+					"p_dept_id": 1136750599,
+					"dept_name": "test"
+				}]
+			}
+		}`
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write([]byte(res))
+}
+
+func departmentsInfoHandler(w http.ResponseWriter, r *http.Request) {
+	var res string
+
+	if !checkAccess(r) {
+		res = `{ "ret": 1, "msg": "auth required" }`
+	} else {
+		res = `{
+			"ret": 0,
+			"data": {
+				"74537005": {
+					"dept_id": 74537005,
+		      "p_dept_id": 1136750599,
+		      "dept_name": "test"
+				}
+			}
+		}`
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write([]byte(res))
+}
+
+func usersListHandler(w http.ResponseWriter, r *http.Request) {
+	var res string
+
+	if !checkAccess(r) {
+		res = `{ "ret": 1, "msg": "auth required" }`
+	} else {
+		res = `{
+			"ret": 0,
+			"data": {
+				"timestamp": 1408414724,
+				"items": [{
+					"open_id": "2c0c7cdf67fd7d442db2390dce393bce",
+	        "gender": 1,
+	        "account": "yx",
+	        "realname": "Heroic Yang",
+	        "p_dept_id": "74537005",
+	        "mobile": 0,
+	        "hidden": 0,
+	        "role_id": 0
+				}]
+			}
+		}`
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write([]byte(res))
+}
+
+func usersInfoHandler(w http.ResponseWriter, r *http.Request) {
+	var res string
+
+	if !checkAccess(r) {
+		res = `{ "ret": 1, "msg": "auth required" }`
+	} else {
+		res = `{
+			"ret": 0,
+			"data": {
+				"2c0c7cdf67fd7d442db2390dce393bce": {
+		      "open_id": "2c0c7cdf67fd7d442db2390dce393bce",
+		      "gender": 1,
+		      "dept_id": 1565199740,
+		      "dept_ids": [
+		        1565199740,
+		        1291619508,
+		        140325039
+		      ],
+		      "role_id": 16777216,
+		      "account": "Karl",
+		      "name": "卡尔",
+		      "titles": [
+		        "员工",
+		        "秘书",
+		        "组长"
+		      ],
+		      "title": "员工",
+		      "email": 0,
+		      "mobile": 1,
+		      "hidden": 0
+		    }
+			}
+		}`
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write([]byte(res))
+}
+
+func usersFaceHandler(w http.ResponseWriter, r *http.Request) {
+	var res string
+
+	if !checkAccess(r) {
+		res = `{ "ret": 1, "msg": "auth required" }`
+	} else {
+		res = `{
+			"ret": 0,
+			"data": {
+				"items": {
+		      "2c0c7cdf67fd7d442db2390dce393bce": "http://q4.qlogo.cn/g?b=qq&k=9WO8jIfeqm2smbqibCeBIzw&s=100&t=1401893441"
+		    }
+			}
+		}`
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write([]byte(res))
+}
+
+func usersEmailHandler(w http.ResponseWriter, r *http.Request) {
+	var res string
+
+	if !checkAccess(r) {
+		res = `{ "ret": 1, "msg": "auth required" }`
+	} else {
+		res = `{
+			"ret": 0,
+			"data": {
+				"2c0c7cdf67fd7d442db2390dce393bce": "a@b.c"
+			}
+		}`
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write([]byte(res))
+}
+
+func usersMobileHandler(w http.ResponseWriter, r *http.Request) {
+	var res string
+
+	if !checkAccess(r) {
+		res = `{ "ret": 1, "msg": "auth required" }`
+	} else {
+		res = `{
+			"ret": 0,
+			"data": {
+				"2c0c7cdf67fd7d442db2390dce393bce": "13800000000"
+			}
+		}`
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write([]byte(res))
+}
+
+func usersQQHandler(w http.ResponseWriter, r *http.Request) {
+	var res string
+
+	if !checkAccess(r) {
+		res = `{ "ret": 1, "msg": "auth required" }`
+	} else {
+		res = `{
+			"ret": 0,
+			"data": {
+				"2c0c7cdf67fd7d442db2390dce393bce": "10000"
+			}
+		}`
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write([]byte(res))
+}
+
+func sendTipHandler(w http.ResponseWriter, r *http.Request) {
+	var res string
+
+	if !checkAccess(r) {
+		res = `{ "ret": 1, "msg": "auth required" }`
+	} else {
+		if r.FormValue("window_title") == "" || r.FormValue("tips_title") == "" ||
+			r.FormValue("tips_content") == "" {
+			res = `{ "ret": 1, "msg": "parameters is not complete" }`
+		} else {
+			res = `{ "ret": 0 }`
 		}
 	}
 
-	result, _ := json.Marshal(res)
+	w.Header().Set("Content-Type", "application/json")
+	w.Write([]byte(res))
+}
+
+func sendBroadcastHandler(w http.ResponseWriter, r *http.Request) {
+	var res string
+
+	if !checkAccess(r) {
+		res = `{ "ret": 1, "msg": "auth required" }`
+	} else {
+		if r.FormValue("title") == "" || r.FormValue("content") == "" ||
+			r.FormValue("recv_open_ids") == "" {
+			res = `{ "ret": 1, "msg": "parameters is not complete" }`
+		} else {
+			res = `{ "ret": 0 }`
+		}
+	}
 
 	w.Header().Set("Content-Type", "application/json")
-	w.Write(result)
+	w.Write([]byte(res))
+}
+
+func sendSmsHandler(w http.ResponseWriter, r *http.Request) {
+	var res string
+
+	if !checkAccess(r) {
+		res = `{ "ret": 1, "msg": "auth required" }`
+	} else {
+		if r.FormValue("recv_phones") == "" || r.FormValue("recv_open_ids") == "" ||
+			r.FormValue("content") == "" {
+			res = `{ "ret": 1, "msg": "parameters is not complete" }`
+		} else {
+			res = `{ "ret": 0 }`
+		}
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write([]byte(res))
 }
 
 func TestAuthorizeUrl(t *testing.T) {
@@ -164,7 +369,8 @@ func TestAuthorizeUrl(t *testing.T) {
 }
 
 func TestAccessToken(t *testing.T) {
-	ts := httptest.NewServer(http.StripPrefix("/oauth2/token", http.HandlerFunc(tokenHandler)))
+	ts := httptest.NewServer(
+		http.StripPrefix("/oauth2/token", http.HandlerFunc(tokenHandler)))
 	app := Init(APP_ID, APP_SECRET)
 
 	app.BaseEndPoint = ts.URL
@@ -182,7 +388,8 @@ func TestAccessToken(t *testing.T) {
 }
 
 func TestCompanyToken(t *testing.T) {
-	ts := httptest.NewServer(http.StripPrefix("/oauth2/companyToken", http.HandlerFunc(tokenHandler)))
+	ts := httptest.NewServer(
+		http.StripPrefix("/oauth2/companyToken", http.HandlerFunc(companyTokenHandler)))
 	app := Init(APP_ID, APP_SECRET)
 
 	app.BaseEndPoint = ts.URL
@@ -200,7 +407,8 @@ func TestCompanyToken(t *testing.T) {
 }
 
 func TestCompanyInfoAPI(t *testing.T) {
-	ts := httptest.NewServer(http.StripPrefix("/api/corporation/get", http.HandlerFunc(companyInfoHandler)))
+	ts := httptest.NewServer(
+		http.StripPrefix("/api/corporation/get", http.HandlerFunc(companyInfoHandler)))
 	app := Init(APP_ID, APP_SECRET)
 
 	app.BaseEndPoint = ts.URL
@@ -220,7 +428,8 @@ func TestCompanyInfoAPI(t *testing.T) {
 }
 
 func TestDepartmentsListAPI(t *testing.T) {
-	ts := httptest.NewServer(http.StripPrefix("/api/dept/list", http.HandlerFunc(departmentsListHandler)))
+	ts := httptest.NewServer(
+		http.StripPrefix("/api/dept/list", http.HandlerFunc(departmentsListHandler)))
 	app := Init(APP_ID, APP_SECRET)
 
 	app.BaseEndPoint = ts.URL
@@ -236,5 +445,233 @@ func TestDepartmentsListAPI(t *testing.T) {
 
 	if res.Ret == 0 {
 		t.Logf("department list '%v'", res.Data)
+	}
+}
+
+func TestDepartmentsInfoAPI(t *testing.T) {
+	ts := httptest.NewServer(
+		http.StripPrefix("/api/dept/info", http.HandlerFunc(departmentsInfoHandler)))
+	app := Init(APP_ID, APP_SECRET)
+
+	app.BaseEndPoint = ts.URL
+
+	defer ts.Close()
+
+	session := app.CreateSession(COMPANY_ID, COMPANY_TOKEN)
+
+	res, err := session.GetDepartmentsByIds("74537005")
+	if err != nil {
+		t.Fatalf("cannot get departments info. [e:%v]", err)
+	}
+
+	if res.Ret == 0 {
+		t.Logf("departments info '%v'", res.Data)
+	}
+}
+
+func TestUsersListAPI(t *testing.T) {
+	ts := httptest.NewServer(
+		http.StripPrefix("/api/user/list", http.HandlerFunc(usersListHandler)))
+	app := Init(APP_ID, APP_SECRET)
+
+	app.BaseEndPoint = ts.URL
+
+	defer ts.Close()
+
+	session := app.CreateSession(COMPANY_ID, COMPANY_TOKEN)
+
+	res, err := session.GetUsers(0)
+	if err != nil {
+		t.Fatalf("cannot get user list. [e:%v]", err)
+	}
+
+	if res.Ret == 0 {
+		t.Logf("user list '%v'", res.Data)
+	}
+}
+
+func TestUsersInfoAPI(t *testing.T) {
+	ts := httptest.NewServer(
+		http.StripPrefix("/api/user/info", http.HandlerFunc(usersInfoHandler)))
+	app := Init(APP_ID, APP_SECRET)
+
+	app.BaseEndPoint = ts.URL
+
+	defer ts.Close()
+
+	session := app.CreateSession(COMPANY_ID, COMPANY_TOKEN)
+
+	res, err := session.GetUsersByOpenIds("2c0c7cdf67fd7d442db2390dce393bce")
+	if err != nil {
+		t.Fatalf("cannot get users info. [e:%v]", err)
+	}
+
+	if res.Ret == 0 {
+		t.Logf("users info '%v'", res.Data)
+	}
+}
+
+func TestUsersFaceAPI(t *testing.T) {
+	ts := httptest.NewServer(
+		http.StripPrefix("/api/user/face", http.HandlerFunc(usersFaceHandler)))
+	app := Init(APP_ID, APP_SECRET)
+
+	app.BaseEndPoint = ts.URL
+
+	defer ts.Close()
+
+	session := app.CreateSession(COMPANY_ID, COMPANY_TOKEN)
+
+	res, err := session.GetUsersFace("2c0c7cdf67fd7d442db2390dce393bce", 3)
+	if err != nil {
+		t.Fatalf("cannot get users face. [e:%v]", err)
+	}
+
+	if res.Ret == 0 {
+		t.Logf("users face '%v'", res.Data)
+	}
+}
+
+func TestUsersEmailAPI(t *testing.T) {
+	ts := httptest.NewServer(
+		http.StripPrefix("/api/user/email", http.HandlerFunc(usersEmailHandler)))
+	app := Init(APP_ID, APP_SECRET)
+
+	app.BaseEndPoint = ts.URL
+
+	defer ts.Close()
+
+	session := app.CreateSession(COMPANY_ID, COMPANY_TOKEN)
+
+	res, err := session.GetUsersEmail("2c0c7cdf67fd7d442db2390dce393bce")
+	if err != nil {
+		t.Fatalf("cannot get users email. [e:%v]", err)
+	}
+
+	if res.Ret == 0 {
+		t.Logf("users email '%v'", res.Data)
+	}
+}
+
+func TestUsersMobileAPI(t *testing.T) {
+	ts := httptest.NewServer(
+		http.StripPrefix("/api/user/mobile", http.HandlerFunc(usersMobileHandler)))
+	app := Init(APP_ID, APP_SECRET)
+
+	app.BaseEndPoint = ts.URL
+
+	defer ts.Close()
+
+	session := app.CreateSession(COMPANY_ID, COMPANY_TOKEN)
+
+	res, err := session.GetUsersMobile("2c0c7cdf67fd7d442db2390dce393bce")
+	if err != nil {
+		t.Fatalf("cannot get users mobile. [e:%v]", err)
+	}
+
+	if res.Ret == 0 {
+		t.Logf("users mobile '%v'", res.Data)
+	}
+}
+
+func TestUsersQQAPI(t *testing.T) {
+	ts := httptest.NewServer(
+		http.StripPrefix("/api/user/qq", http.HandlerFunc(usersQQHandler)))
+	app := Init(APP_ID, APP_SECRET)
+
+	app.BaseEndPoint = ts.URL
+
+	defer ts.Close()
+
+	session := app.CreateSession(COMPANY_ID, COMPANY_TOKEN)
+
+	res, err := session.GetUsersQQ("2c0c7cdf67fd7d442db2390dce393bce")
+	if err != nil {
+		t.Fatalf("cannot get users qq. [e:%v]", err)
+	}
+
+	if res.Ret == 0 {
+		t.Logf("users qq '%v'", res.Data)
+	}
+}
+
+func TestSendTipAPI(t *testing.T) {
+	ts := httptest.NewServer(
+		http.StripPrefix("/api/tips/send", http.HandlerFunc(sendTipHandler)))
+	app := Init(APP_ID, APP_SECRET)
+
+	app.BaseEndPoint = ts.URL
+
+	defer ts.Close()
+
+	session := app.CreateSession(COMPANY_ID, COMPANY_TOKEN)
+
+	data := map[string]interface{}{
+		"window_title": "window_title",
+		"tips_title":   "tips_title",
+		"tips_content": "tips_content",
+	}
+
+	res, err := session.SendTip(data)
+	if err != nil {
+		t.Fatalf("cannot send tip. [e:%v]", err)
+	}
+
+	if res.Ret == 0 {
+		t.Log("tip sended")
+	}
+}
+
+func TestSendBroadcastAPI(t *testing.T) {
+	ts := httptest.NewServer(
+		http.StripPrefix("/api/broadcast/send", http.HandlerFunc(sendBroadcastHandler)))
+	app := Init(APP_ID, APP_SECRET)
+
+	app.BaseEndPoint = ts.URL
+
+	defer ts.Close()
+
+	session := app.CreateSession(COMPANY_ID, COMPANY_TOKEN)
+
+	data := map[string]interface{}{
+		"title":         "title",
+		"content":       "content",
+		"recv_open_ids": "recv_open_ids",
+	}
+
+	res, err := session.SendBroadcast(data)
+	if err != nil {
+		t.Fatalf("cannot send broadcast. [e:%v]", err)
+	}
+
+	if res.Ret == 0 {
+		t.Log("broadcast sended")
+	}
+}
+
+func TestSendSmsAPI(t *testing.T) {
+	ts := httptest.NewServer(
+		http.StripPrefix("/api/sms/send", http.HandlerFunc(sendSmsHandler)))
+	app := Init(APP_ID, APP_SECRET)
+
+	app.BaseEndPoint = ts.URL
+
+	defer ts.Close()
+
+	session := app.CreateSession(COMPANY_ID, COMPANY_TOKEN)
+
+	data := map[string]interface{}{
+		"recv_phones":   "recv_phones",
+		"recv_open_ids": "recv_open_ids",
+		"content":       "content",
+	}
+
+	res, err := session.SendSms(data)
+	if err != nil {
+		t.Fatalf("cannot send sms. [e:%v]", err)
+	}
+
+	if res.Ret == 0 {
+		t.Log("sms sended")
 	}
 }

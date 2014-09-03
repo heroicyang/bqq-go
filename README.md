@@ -1,4 +1,7 @@
 ## bqq-go
+
+![Build Status](http://img.shields.io/travis/heroicyang/bqq-go.svg?style=flat-square)
+
 > A Tencent Business QQ API Wrapper In Go.
 
 ## Usage
@@ -14,6 +17,7 @@ import (
 func main() {
   app := bqq.Init("APP_ID", "APP_SECRET")
   app.BaseEndPoint = "https://openapi.b.qq.com"
+  app.RedirectUri = "http://yourdomain.com/oauth/callback"
 
   // Requset company id and token
   res, _ := app.GetCompanyToken("code", "state")
