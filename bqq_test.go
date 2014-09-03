@@ -27,18 +27,18 @@ func tokenHandler(w http.ResponseWriter, r *http.Request) {
 
 	if r.FormValue("code") == "" {
 		res = &Result{
-			Ret: 1,
-			Msg: "code required",
+			"ret": 1,
+			"msg": "code required",
 		}
 	} else if r.FormValue("state") == "" {
 		res = &Result{
-			Ret: 1,
-			Msg: "state required",
+			"ret": 1,
+			"msg": "state required",
 		}
 	} else {
 		res = &Result{
-			Ret: 0,
-			Data: map[string]interface{}{
+			"ret": 0,
+			"data": map[string]interface{}{
 				"access_token":  ACCESS_TOKEN,
 				"refresh_token": REFRESH_TOKEN,
 				"expires_in":    720000,
@@ -59,18 +59,18 @@ func companyTokenHandler(w http.ResponseWriter, r *http.Request) {
 
 	if r.FormValue("code") == "" {
 		res = &Result{
-			Ret: 1,
-			Msg: "code required",
+			"ret": 1,
+			"msg": "code required",
 		}
 	} else if r.FormValue("state") == "" {
 		res = &Result{
-			Ret: 1,
-			Msg: "state required",
+			"ret": 1,
+			"msg": "state required",
 		}
 	} else {
 		res = &Result{
-			Ret: 0,
-			Data: map[string]interface{}{
+			"ret": 0,
+			"data": map[string]interface{}{
 				"company_id":    COMPANY_ID,
 				"company_token": COMPANY_TOKEN,
 				"refresh_token": REFRESH_TOKEN,
@@ -382,8 +382,8 @@ func TestAccessToken(t *testing.T) {
 		t.Fatalf("cannot get access token. [e:%v]", err)
 	}
 
-	if res.Ret == 0 {
-		t.Logf("access token is '%v'", res.Data)
+	if res.Get("ret") == float64(0) {
+		t.Logf("access token is '%v'", res.Get("data.access_token"))
 	}
 }
 
@@ -401,8 +401,8 @@ func TestCompanyToken(t *testing.T) {
 		t.Fatalf("cannot get company token. [e:%v]", err)
 	}
 
-	if res.Ret == 0 {
-		t.Logf("company token is '%v'", res.Data["company_token"])
+	if res.Get("ret") == float64(0) {
+		t.Logf("company token is '%v'", res.Get("data.company_token"))
 	}
 }
 
@@ -422,8 +422,8 @@ func TestCompanyInfoAPI(t *testing.T) {
 		t.Fatalf("cannot get company info. [e:%v]", err)
 	}
 
-	if res.Ret == 0 {
-		t.Logf("company info '%v'", res.Data)
+	if res.Get("ret") == float64(0) {
+		t.Logf("company info '%v'", res.Get("data"))
 	}
 }
 
@@ -443,8 +443,8 @@ func TestDepartmentsListAPI(t *testing.T) {
 		t.Fatalf("cannot get department list. [e:%v]", err)
 	}
 
-	if res.Ret == 0 {
-		t.Logf("department list '%v'", res.Data)
+	if res.Get("ret") == float64(0) {
+		t.Logf("department list '%v'", res.Get("data"))
 	}
 }
 
@@ -464,8 +464,8 @@ func TestDepartmentsInfoAPI(t *testing.T) {
 		t.Fatalf("cannot get departments info. [e:%v]", err)
 	}
 
-	if res.Ret == 0 {
-		t.Logf("departments info '%v'", res.Data)
+	if res.Get("ret") == float64(0) {
+		t.Logf("departments info '%v'", res.Get("data"))
 	}
 }
 
@@ -485,8 +485,8 @@ func TestUsersListAPI(t *testing.T) {
 		t.Fatalf("cannot get user list. [e:%v]", err)
 	}
 
-	if res.Ret == 0 {
-		t.Logf("user list '%v'", res.Data)
+	if res.Get("ret") == float64(0) {
+		t.Logf("user list '%v'", res.Get("data"))
 	}
 }
 
@@ -506,8 +506,8 @@ func TestUsersInfoAPI(t *testing.T) {
 		t.Fatalf("cannot get users info. [e:%v]", err)
 	}
 
-	if res.Ret == 0 {
-		t.Logf("users info '%v'", res.Data)
+	if res.Get("ret") == float64(0) {
+		t.Logf("users info '%v'", res.Get("data"))
 	}
 }
 
@@ -527,8 +527,8 @@ func TestUsersFaceAPI(t *testing.T) {
 		t.Fatalf("cannot get users face. [e:%v]", err)
 	}
 
-	if res.Ret == 0 {
-		t.Logf("users face '%v'", res.Data)
+	if res.Get("ret") == float64(0) {
+		t.Logf("users face '%v'", res.Get("data"))
 	}
 }
 
@@ -548,8 +548,8 @@ func TestUsersEmailAPI(t *testing.T) {
 		t.Fatalf("cannot get users email. [e:%v]", err)
 	}
 
-	if res.Ret == 0 {
-		t.Logf("users email '%v'", res.Data)
+	if res.Get("ret") == float64(0) {
+		t.Logf("users email '%v'", res.Get("data"))
 	}
 }
 
@@ -569,8 +569,8 @@ func TestUsersMobileAPI(t *testing.T) {
 		t.Fatalf("cannot get users mobile. [e:%v]", err)
 	}
 
-	if res.Ret == 0 {
-		t.Logf("users mobile '%v'", res.Data)
+	if res.Get("ret") == float64(0) {
+		t.Logf("users mobile '%v'", res.Get("data"))
 	}
 }
 
@@ -590,8 +590,8 @@ func TestUsersQQAPI(t *testing.T) {
 		t.Fatalf("cannot get users qq. [e:%v]", err)
 	}
 
-	if res.Ret == 0 {
-		t.Logf("users qq '%v'", res.Data)
+	if res.Get("ret") == float64(0) {
+		t.Logf("users qq '%v'", res.Get("data"))
 	}
 }
 
@@ -617,7 +617,7 @@ func TestSendTipAPI(t *testing.T) {
 		t.Fatalf("cannot send tip. [e:%v]", err)
 	}
 
-	if res.Ret == 0 {
+	if res.Get("ret") == float64(0) {
 		t.Log("tip sended")
 	}
 }
@@ -644,7 +644,7 @@ func TestSendBroadcastAPI(t *testing.T) {
 		t.Fatalf("cannot send broadcast. [e:%v]", err)
 	}
 
-	if res.Ret == 0 {
+	if res.Get("ret") == float64(0) {
 		t.Log("broadcast sended")
 	}
 }
@@ -671,7 +671,7 @@ func TestSendSmsAPI(t *testing.T) {
 		t.Fatalf("cannot send sms. [e:%v]", err)
 	}
 
-	if res.Ret == 0 {
+	if res.Get("ret") == float64(0) {
 		t.Log("sms sended")
 	}
 }

@@ -21,8 +21,8 @@ func main() {
 
   // Requset company id and token
   res, _ := app.GetCompanyToken("code", "state")
-  companyId := res.Data["company_id"]
-  companyToken := res.Data["company_token"]
+  companyId := res.Get("data.company_id")
+  companyToken := res.Get("data.company_token")
 
   // Create a session based on the app
   session := app.CreateSession(companyId, companyToken)
@@ -30,7 +30,7 @@ func main() {
   // Request API with the session
   res, _ := session.GetCompanyInfo()
 
-  fmt.Println("company name: ", res.Data["company_name"])
-  fmt.Println("company fullname: ", res.Data["company_fullname"])
+  fmt.Println("company name: ", res.Get("data.company_name"))
+  fmt.Println("company fullname: ", res.Get("data.company_fullname"))
 }
 ```
