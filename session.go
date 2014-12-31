@@ -82,7 +82,7 @@ func (session *Session) getRequestUrl(path string, params Params) string {
 	params["company_id"] = session.companyId
 	params["company_token"] = session.companyToken
 	params["app_id"] = session.app.AppId
-	params["version"] = 2
+	params["oauth_version"] = 2
 
 	if _, exist := params["open_id"]; !exist && session.OpenId != "" {
 		params["open_id"] = session.OpenId
