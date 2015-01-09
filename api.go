@@ -92,3 +92,17 @@ func (session *Session) SendBroadcast(data map[string]interface{}) (Result, erro
 func (session *Session) SendSms(data map[string]interface{}) (Result, error) {
 	return session.Post("/api/sms/send", data)
 }
+
+// Get user's superior.
+// Please refer to API wiki: http://open.b.qq.com/wiki/api:api_relation_getsuperior
+func (session *Session) GetSuperior(openId string) (Result, error) {
+	params := Params{"open_id": openId}
+	return session.Get("/api/relation/getsuperior", params)
+}
+
+// Get user's subordinates.
+// Please refer to API wiki: http://open.b.qq.com/wiki/api:api_relation_getsubordinates
+func (session *Session) GetSubordinates(openId string) (Result, error) {
+	params := Params{"open_id": openId}
+	return session.Get("/api/relation/getsubordinates", params)
+}
